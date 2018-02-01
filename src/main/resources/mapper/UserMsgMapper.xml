@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uca.dao.UserMsgMapper">
+
+    <insert id="insert" parameterType="com.uca.entity.UserMsg">
+        INSERT INTO uca.uca_user_msg
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="msgId != null" >
+                msgId,
+            </if>
+            <if test="sendType != null" >
+                sendType,
+            </if>
+            <if test="sendUser != null" >
+                sendUser,
+            </if>
+            <if test="receiveUser != null" >
+                receiveUser,
+            </if>
+            <if test="chatMsg != null" >
+                chatMsg,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="msgId != null" >
+                #{msgId,jdbcType=BIGINT},
+            </if>
+            <if test="sendType != null" >
+                #{sendType,jdbcType=INTEGER},
+            </if>
+            <if test="sendUser != null" >
+                #{sendUser,jdbcType=VARCHAR},
+            </if>
+            <if test="receiveUser != null" >
+                #{receiveUser,jdbcType=VARCHAR},
+            </if>
+            <if test="chatMsg != null" >
+                #{chatMsg,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

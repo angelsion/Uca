@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uca.dao.FaqMapper">
+
+    <sql id="Faq_Type_List">
+        id,typeName,parentId,`level`,createTime,modifyTime,modifier
+    </sql>
+    <sql id="Faq_Text_List">
+        richTextId,textDesc,textContent,faqId,faqTypeId,valid,createTime,modifyTime,modifier
+    </sql>
+    <insert id="insertFaqType" parameterType="com.uca.entity.FaqType">
+        INSERT INTO uca.ct_faq_type
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id !=null ">
+                id,
+            </if>
+            <if test="typeName !=null and typeName.length()>0">
+                typeName,
+            </if>
+            <if test="parentId !=null ">
+                parentId,
+            </if>
+            <if test="level !=null ">
+                `level`,
+            </if>
+            <if test="modifier !=null ">
+                modifier
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id !=null ">
+                #{id},
+            </if>
+            <if test="typeName !=null and typeName.length()>0">
+                #{typeName},
+            </if>
+            <if test="parentId !=null ">
+                #{parentId},
+            </if>
+            <if test="level !=null ">
+                #{level},
+            </if>
+            <if test="modifier !=null ">
+                #{level}
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertRichText" parameterType="com.uca.entity.FaqText">
+        INSERT INTO uca.ct_faq_text
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="richTextId !=null ">
+                richTextId,
+            </if>
+            <if test="textDesc !=null and textDesc.length()>0">
+                textDesc,
+            </if>
+            <if test="textContent !=null and textContent.length()>0">
+                textContent,
+            </if>
+            <if test="faqId !=null ">
+                faqId,
+            </if>
+            <if test="faqTypeId !=null ">
+                faqTypeId,
+            </if>
+            <if test="valid !=null ">
+                valid,
+            </if>
+            <if test="modifier !=null ">
+                modifier
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="richTextId !=null ">
+                #{richTextId},
+            </if>
+            <if test="textDesc !=null and textDesc.length()>0">
+                #{textDesc},
+            </if>
+            <if test="textContent !=null and textContent.length()>0">
+                #{textContent},
+            </if>
+            <if test="faqId !=null ">
+                #{faqId},
+            </if>
+            <if test="faqTypeId !=null ">
+                #{faqTypeId},
+            </if>
+            <if test="valid !=null ">
+                #{valid},
+            </if>
+            <if test="modifier !=null ">
+                #{modifier}
+            </if>
+        </trim>
+    </insert>
+    <insert id="faqAdd" parameterType="com.uca.entity.Faq">
+        INSERT INTO uca.ct_faq
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id !=null ">
+                id,
+            </if>
+            <if test="issue !=null and issue.length()>0">
+                issue,
+            </if>
+            <if test="faqTypeId !=null ">
+                faqTypeId,
+            </if>
+            <if test="modifier !=null ">
+                modifier
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id !=null ">
+                #{id},
+            </if>
+            <if test="issue !=null and issue.length()>0">
+                #{issue},
+            </if>
+            <if test="faqTypeId !=null ">
+                #{faqTypeId},
+            </if>
+            <if test="modifier !=null ">
+                #{modifier}
+            </if>
+        </trim>
+    </insert>
+
+
+
+    <update id="updateById" parameterType="com.uca.entity.FaqType">
+        UPDATE uca.ct_faq_type
+        <set>
+            <if test="typeName !=null and typeName.length()>0">
+                typeName = #{typeName},
+            </if>
+            <if test="parentId !=null ">
+                parentId = #{parentId},
+            </if>
+            <if test="level !=null ">
+                level = #{level},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <update id="updateRichText" parameterType="com.uca.entity.FaqText">
+        UPDATE uca.ct_faq_text
+        <set>
+            <if test="textDesc !=null and textDesc.length()>0">
+                textDesc = #{textDesc},
+            </if>
+            <if test="textContent !=null and textContent.length()>0">
+                textContent = #{textContent},
+            </if>
+            <if test="faqId !=null ">
+                faqId = #{faqId},
+            </if>
+            <if test="faqTypeId !=null ">
+                faqTypeId = #{faqTypeId},
+            </if>
+            <if test="valid !=null ">
+                valid = #{valid}
+            </if>
+        </set>
+        WHERE richTextId = #{richTextId}
+    </update>
+    <update id="updateFaq" parameterType="com.uca.entity.Faq">
+        UPDATE uca.ct_faq
+        <set>
+            <if test="issue !=null and issue.length()>0">
+                issue = #{issue},
+            </if>
+            <if test="faqTypeId !=null ">
+                faqTypeId = #{faqTypeId},
+            </if>
+            <if test="modifier !=null ">
+                modifier = #{modifier}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteFaqType">
+        DELETE FROM uca.ct_faq_type
+        WHERE id = #{id}
+    </delete>
+    <delete id="deleteRichText">
+        DELETE FROM uca.ct_faq_text
+        WHERE richTextId = #{richTextId}
+    </delete>
+    <delete id="deleteFaq">
+        DELETE FROM uca.ct_faq
+        WHERE id = #{id}
+    </delete>
+
+    <select id="selectShowAll" resultType="com.uca.entity.FaqType">
+        SELECT
+        <include refid="Faq_Type_List"/>
+        FROM uca.ct_faq_type
+    </select>
+    <select id="selectOneShow" resultType="com.uca.entity.FaqType">
+        SELECT
+        <include refid="Faq_Type_List"/>
+        FROM uca.ct_faq_type
+        WHERE level = 1;
+    </select>
+    <select id="selectTwoShow" resultType="com.uca.entity.FaqType">
+        SELECT
+        <include refid="Faq_Type_List"/>
+        FROM uca.ct_faq_type
+        WHERE parentId = #{parentId}
+    </select>
+    <select id="selectShowByFaqTypeId" resultType="com.uca.entity.Faq">
+        SELECT id,issue,faqTypeId,createTime,modifyTime,modifier
+        FROM uca.ct_faq
+        WHERE faqTypeId = #{faqTypeId}
+    </select>
+    <select id="selectFaqTextByFaqId" resultType="com.uca.entity.FaqText"
+            parameterType="com.uca.entity.FaqText">
+        SELECT
+        <include refid="Faq_Text_List"/>
+        FROM uca.ct_faq_text
+        WHERE faqTypeId = #{faqTypeId} AND faqId = #{faqId}
+    </select>
+
+</mapper>

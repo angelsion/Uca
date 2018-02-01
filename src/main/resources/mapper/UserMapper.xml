@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.uca.dao.UserMapper">
+    <sql id="user_list">
+        userId,userName,account,password,email,phone,sex,picture,valid,weixinUserId,createTime,modifyTime
+    </sql>
+
+    <select id="selectByPrimaryKey" resultType="com.uca.entity.User">
+        SELECT
+        <include refid="user_list"/>
+        FROM uca.uca_user
+        WHERE userId = #{userId}
+    </select>
+    <select id="selectBySysUserAccount" resultType="com.uca.entity.User">
+        SELECT
+        <include refid="user_list"/>
+        FROM uca.uca_user
+        WHERE account = #{account}
+    </select>
+    <select id="selectByUsername" resultType="com.uca.entity.User">
+        SELECT
+        <include refid="user_list"/>
+        FROM uca.uca_user
+        WHERE phone = #{username} OR account = #{username}
+    </select>
+</mapper>
